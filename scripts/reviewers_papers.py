@@ -39,17 +39,26 @@ classifier = clasifier.fit(tfidf[:len(authorid)], authorid);
 labels = clasifier.predict(tfidf[len(authorid):])
 
 centroid = []
+print(tfidf[0].shape)
+initial_val = []
+for i in range(tfidf[0].shape[1]):
+	initial_val.append(0)
+
 num_papers = []
 for i in keys:
-	centroid.append(0)
+	centroid.append(initial_val)
 	num_papers.append(0.0)
 
 for i in range(len(labels)):
 	centroid[labels[i]] = tfidf[len(authorid) + i] + centroid[labels[i]]
 	num_papers[labels[i]] = num_papers[labels[i]] + 1;
-print centroid[0]
+print centroid[1]
+print centroid[2]
+
+j = 1
 for i in keys:
-	centroid[i] = map(lambda x: x/num_papers[i], centroid[i])
+	centroid[j] = map(lambda x: x/num_papers[j], centroid[j])
+	j = j + 1
 
 
 
