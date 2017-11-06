@@ -28,4 +28,7 @@ for i in ind :
 		_tmp.append(author_map_[ argmax(tmp_)])
 		tmp_[argmax(tmp_)] = -1
 	arr.append(_tmp)
-print arr
+f = open('out.txt', "w")
+for a in arr:
+	f.write(str(a)[1:-1]+'\n')
+f.close()
