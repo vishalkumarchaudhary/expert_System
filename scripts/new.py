@@ -25,7 +25,7 @@ for i in range(papers.shape[0]):
 
 tmp = hstack((papers[:,1],peshi[:,0]))
 
-v_papers = TfidfVectorizer(decode_error='ignore', max_features=100).fit_transform(tmp).toarray()
+v_papers = TfidfVectorizer(decode_error='ignore', max_features=75, max_df=.5 ,min_df=0.001).fit_transform(tmp).toarray()
 
 #print(v_papers[:,len(authorid)].shape)
 
@@ -34,11 +34,23 @@ classifier = KNeighborsClassifier(n_neighbors=5)
 classifier.fit(v_papers[:len(authorid),] , authorid )
 
 (neig , ind )= classifier.kneighbors(v_papers[len(authorid):,],100)
+print len(vals)
 arr=[]
 for i in ind :
 	tmp = []
-	for j in i[:5] :
-		tmp.append(author_map_[authorid[j]])
-	arr.append(tmp)
+	tmp_ = []
+	_tmp = []
+	for j in i:
+		tmp.append(authorid[j])
+
+
+	for j in range(len(vals)):
+		tmp_.append(tmp.count(j))
+	tmp_ = array(tmp_)
+
+	for j in range(5):
+		_tmp.append(author_map_[ argmax(tmp_)])
+		tmp_[argmax(tmp_)] = -1
+	arr.append(_tmp)
 
 print(arr)
