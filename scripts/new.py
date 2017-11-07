@@ -31,16 +31,21 @@ def predictExpert(N):
 		_tmp = []
 		for j in i:
 			tmp.append(authorid[j])
-		for j in range(len(vals)):
-			tmp_.append(tmp.count(j))
-		for j in range(10):
-			_tmp.append(author_map_[ argmax(tmp_)])
-			tmp_[argmax(tmp_)] = -1
-		arr.append(_tmp)
+		for j in range(1,len(vals)):
+			tmp_.append(str(author_map_[j]+':'+str(tmp.count(j))))
+		arr.append(tmp_)
 	print using('stop')
 	f = open('out.txt', "w")
 	for a in arr:
-		f.write(str(a)[1:-1]+'\n')
+		for b in a:
+			f.write(str(b) + ',')
+		f.write('\n')
 	f.close()
 
-predictExpert(60)
+predictExpert(100)
+a=[0,1,2,3,4,5,10,11,13,14,16,17,18,22,26,29,34,35,36,40,45,52,56,63,79,83,88,93,103,128,139,144,145,147]
+f=open ('out_.txt','w')
+with open("out.txt") as fp:
+    for i, line in enumerate(fp):
+        if i in a:
+            f.write(line)
