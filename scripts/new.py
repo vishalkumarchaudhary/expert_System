@@ -44,7 +44,7 @@ def predictExpert(N):
 
 predictExpert(100)
 a=[0,1,2,3,4,5,10,11,13,14,16,17,18,22,26,29,34,35,36,40,45,52,56,63,79,83,88,93,103,128,139,144,145,147]
-f=open ('out_.txt','w')
+f=open ('paper_reviewer_score.txt','w')
 with open("out.txt") as fp:
 	for i, line in enumerate(fp):
 		if i in a:
